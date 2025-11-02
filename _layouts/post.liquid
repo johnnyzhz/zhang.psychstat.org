@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">
+      {{ page.date | date: "%B %-d, %Y" }}
+      {% if page.author %}
+        • <span>{{ page.author }}</span>
+      {% endif %}
+      {% if page.meta %}
+        • {{ page.meta }}
+      {% endif %}
+    </p>
+  </header>
+
+  <article class="post-content">
+    {{ content }}
+  </article>
+
+  {% if page.tags %}
+  <div class="post-tags">
+    <strong>Tags:</strong>
+    {% for tag in page.tags %}
+      <a href="{{ '/blog/tag/' | append: tag | relative_url }}">#{{ tag }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if site.related_blog_posts.enabled and site.related_blog_posts.max_related > 0 %}
+  <div class="related-posts mt-5">
+    <h2>Related Posts</h2>
+    {% assign max_related = site.related_blog_posts.max_related %}
+    {% assign related_posts = site.posts | where_exp: "post", "post.url != page.url" | sample: max_related %}
+    <ul>
+      {% for related_post in related_posts %}
+        <li><a href="{{ related_post.url | relative_url }}">{{ related_post.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</article>

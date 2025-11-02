@@ -1,0 +1,58 @@
+---
+layout: default
+---
+
+<div class="about">
+  {% if page.profile %}
+  <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
+    {% if page.profile.image %}
+      <img class="img-fluid z-depth-1 rounded{% if page.profile.image_circular %} rounded-circle{% endif %}" 
+           src="{{ page.profile.image | prepend: '/assets/img/' | relative_url }}" 
+           alt="profile picture"
+           onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=Profile+Image'">
+    {% endif %}
+    {% if page.profile.more_info %}
+    <div class="more-info">
+      {{ page.profile.more_info }}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <div class="clearfix">
+    <h1 class="post-title">
+      {{ site.first_name }} {% if site.middle_name %}{{ site.middle_name }} {% endif %}{{ site.last_name }}
+    </h1>
+    {% if page.subtitle %}
+    <p class="desc">{{ page.subtitle }}</p>
+    {% endif %}
+  </div>
+
+  <article>
+    <div class="content">
+      {{ content }}
+    </div>
+  </article>
+
+  {% if page.news and site.announcements.enabled %}
+  <div class="news mt-5">
+    <h2>news</h2>
+    {% include news.liquid limit=true %}
+  </div>
+  {% endif %}
+
+  {% if page.selected_papers %}
+  <div class="publications mt-5">
+    <h2>selected publications</h2>
+    <p>Selected publications will appear here.</p>
+  </div>
+  {% endif %}
+
+  {% if page.social %}
+  <div class="social mt-4">
+    <div class="contact-icons">
+      {% include social.liquid %}
+    </div>
+  </div>
+  {% endif %}
+</div>

@@ -1,0 +1,11 @@
+<footer class="{% if site.footer_fixed %}fixed-bottom{% else %}mt-5{% endif %}">
+  <div class="container mt-0">
+    <div class="text-center">
+      © Copyright {{ 'now' | date: "%Y" }} {{ site.first_name }} {{ site.last_name }}.
+      {{ site.footer_text }}
+      {% if site.last_updated %}
+        Last updated: {{ 'now' | date: "%B %Y" }}.
+      {% endif %}
+    </div>
+  </div>
+</footer>
